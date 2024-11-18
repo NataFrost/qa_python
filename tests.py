@@ -1,6 +1,5 @@
 import pytest
 
-from main import BooksCollector
 
 # класс TestBooksCollector объединяет набор тестов, которыми мы покрываем наше приложение BooksCollector
 # обязательно указывать префикс Test
@@ -98,11 +97,11 @@ class TestBooksCollector:
         [[], 'Book 1', []],
     ])
     def test_delete_book_from_favorites(self, collector, books, book_to_delete, expected_books):
+        # добавление книг из тестовых данных в избранное
         if books:
             for name in books:
                 collector.add_new_book(name)
                 collector.add_book_in_favorites(name)
+        # удаление книги из избранного
         collector.delete_book_from_favorites(book_to_delete)
         assert collector.get_list_of_favorites_books() == expected_books
-
-
